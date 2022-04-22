@@ -1,24 +1,36 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
+import {RefreshControl, ScrollView} from 'react-native';
+import {useRedux} from '../../hooks';
 import {Header} from '../components';
+import {themes} from '../themes';
 import NewsList from './NewsList/NewsList';
-import Settings from './Settings/Settings';
-
 const Page = ({children}) => children;
 
-Page.NewsList = () => (
-  <Page>
-    <Header />
-    <ScrollView style={{flex: 1}}>
-      <NewsList />
-    </ScrollView>
-  </Page>
-);
+Page.NewsList = () => {
+  const [loading, setLoading] = useRedux('loading', false);
+  const [theme] = useRedux('theme');
+  return (
+    <Page>
+      <Header />
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            style={{backgroundColor: themes[theme]?.secondaryColor}}
+            refreshing={loading}
+            onRefresh={() => {
+              setLoading(true);
+            }}
+          />
+        }
+        style={{flex: 1}}>
+        <NewsList />
+      </ScrollView>
+    </Page>
+  );
+};
 Page.Single = () => (
   <Page>
-    <ScrollView style={{flex: 1}}>
-      <NewsList />
-    </ScrollView>
+    <ScrollView style={{flex: 1}}>{/* <NewsList /> */}</ScrollView>
   </Page>
 );
 

@@ -8,16 +8,41 @@ const NewsList = () => {
   const [newsList, setNewsList] = useState({});
   const [theme] = useRedux('theme');
   const [searchedValue] = useRedux('searchedValue', 'latest');
+  const [loading, setLoading] = useRedux('loading');
   const {newsPage} = styles(theme);
   useEffect(() => {
     axios
       .get(
-        `https://newsapi.org/v2/everything?q=${searchedValue}&from=2022-03-21&sortBy=publishedAt&apiKey=fd7bcfdaec9940239926a0c89a25388b`,
+        `https://newsapi.org/v2/everything?q=${searchedValue}&from=2022-03-22&language=it&sortBy=publishedAt&apiKey=ee5a141a6917434cb121cfa4cdaf3bd1`,
       )
-      .then(setNewsList);
+      .then(res => {
+        setNewsList(res);
+      });
   }, [searchedValue]);
+  useEffect(() => {
+    loading &&
+      axios
+        .get(
+          `https://newsapi.org/v2/everything?q=${searchedValue}&from=2022-03-22&sortBy=publishedAt&apiKey=ee5a141a6917434cb121cfa4cdaf3bd1`,
+        )
+        .then(res => {
+          setNewsList(res);
+          setLoading(false);
+        });
+  }, [loading]);
   return (
-    <View style={newsPage}>{newsList?.data?.articles?.map(ArticleCard)}</View>
+    <View style={newsPage}>
+      {newsList?.data?.articles
+        .filter(Boolean)
+        .map(({title, urlToImage}, i) => (
+          <ArticleCard
+            key={i}
+            theme={theme}
+            title={title}
+            urlToImage={urlToImage}
+          />
+        ))}
+    </View>
   );
 };
 export default NewsList;
