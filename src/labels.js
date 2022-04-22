@@ -8,6 +8,9 @@ export const labels = {
     Light: 'Light',
     Dark: 'Dark',
     Search: 'Search...',
+    GoBack: 'Go Back',
+    Author: 'Author:',
+    PublishedAt: 'Published At:',
   },
   it: {
     England: 'Englesse',
@@ -18,5 +21,8 @@ export const labels = {
     Light: 'Leggera',
     Dark: 'Buia',
     Search: 'Ricerca...',
+    GoBack: 'Torna indietro',
+    Author: 'Autore:',
+    PublishedAt: 'Pubblicato a:',
   },
 };

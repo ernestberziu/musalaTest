@@ -4,9 +4,10 @@ import {useRedux} from '../../hooks';
 import {Header} from '../components';
 import {themes} from '../themes';
 import NewsList from './NewsList/NewsList';
+import Single from './Single/Single';
 const Page = ({children}) => children;
 
-Page.NewsList = () => {
+Page.NewsList = e => {
   const [loading, setLoading] = useRedux('loading', false);
   const [theme] = useRedux('theme');
   return (
@@ -30,7 +31,9 @@ Page.NewsList = () => {
 };
 Page.Single = () => (
   <Page>
-    <ScrollView style={{flex: 1}}>{/* <NewsList /> */}</ScrollView>
+    <ScrollView style={{flex: 1}}>
+      <Single />
+    </ScrollView>
   </Page>
 );
 

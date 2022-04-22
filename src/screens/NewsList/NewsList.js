@@ -7,13 +7,14 @@ import {styles} from './styles';
 const NewsList = () => {
   const [newsList, setNewsList] = useState({});
   const [theme] = useRedux('theme');
+  const [language] = useRedux('language');
   const [searchedValue] = useRedux('searchedValue', 'latest');
   const [loading, setLoading] = useRedux('loading');
   const {newsPage} = styles(theme);
   useEffect(() => {
     axios
       .get(
-        `https://newsapi.org/v2/everything?q=${searchedValue}&from=2022-03-22&language=it&sortBy=publishedAt&apiKey=ee5a141a6917434cb121cfa4cdaf3bd1`,
+        `https://newsapi.org/v2/everything?q=${searchedValue}&from=2022-03-22&language=${language}&sortBy=publishedAt&apiKey=2ce283498f0b4af689d563fa3d901230`,
       )
       .then(res => {
         setNewsList(res);
@@ -23,7 +24,7 @@ const NewsList = () => {
     loading &&
       axios
         .get(
-          `https://newsapi.org/v2/everything?q=${searchedValue}&from=2022-03-22&sortBy=publishedAt&apiKey=ee5a141a6917434cb121cfa4cdaf3bd1`,
+          `https://newsapi.org/v2/everything?q=${searchedValue}&from=2022-03-22&language=${language}&sortBy=publishedAt&apiKey=2ce283498f0b4af689d563fa3d901230`,
         )
         .then(res => {
           setNewsList(res);
@@ -32,16 +33,9 @@ const NewsList = () => {
   }, [loading]);
   return (
     <View style={newsPage}>
-      {newsList?.data?.articles
-        .filter(Boolean)
-        .map(({title, urlToImage}, i) => (
-          <ArticleCard
-            key={i}
-            theme={theme}
-            title={title}
-            urlToImage={urlToImage}
-          />
-        ))}
+      {newsList?.data?.articles.filter(Boolean).map((e, i) => (
+        <ArticleCard key={i} {...{...e}} theme={theme} />
+      ))}
     </View>
   );
 };
