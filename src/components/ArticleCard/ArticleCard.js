@@ -3,7 +3,7 @@ import {View, Image, Text, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {styles} from './styles';
 const ArticleCard = e => {
-  const {title = '', urlToImage = '', theme} = e;
+  let {title = '', urlToImage: uri = '', theme} = e;
   const {cardContainer, mainImage, headlight} = styles(theme);
   const navigate = useNavigation();
   return (
@@ -12,7 +12,7 @@ const ArticleCard = e => {
         <Image
           style={mainImage}
           source={{
-            uri: urlToImage,
+            uri,
           }}
         />
         <Text style={headlight}>{title}</Text>

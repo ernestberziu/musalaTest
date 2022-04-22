@@ -8,28 +8,21 @@ const NewsList = () => {
   const [newsList, setNewsList] = useState({});
   const [theme] = useRedux('theme');
   const [language] = useRedux('language');
-  const [searchedValue] = useRedux('searchedValue', 'latest');
+  const [searchedValue] = useRedux('searchedValue', '');
   const [loading, setLoading] = useRedux('loading');
   const {newsPage} = styles(theme);
+  const api = axios.get(
+    `https://newsapi.org/v2/everything?q=${searchedValue}&from=2022-03-22&language=${language}&sortBy=publishedAt&apiKey=2ce283498f0b4af689d563fa3d901230`,
+  );
   useEffect(() => {
-    axios
-      .get(
-        `https://newsapi.org/v2/everything?q=${searchedValue}&from=2022-03-22&language=${language}&sortBy=publishedAt&apiKey=2ce283498f0b4af689d563fa3d901230`,
-      )
-      .then(res => {
-        setNewsList(res);
-      });
+    api.then(setNewsList);
   }, [searchedValue]);
   useEffect(() => {
     loading &&
-      axios
-        .get(
-          `https://newsapi.org/v2/everything?q=${searchedValue}&from=2022-03-22&language=${language}&sortBy=publishedAt&apiKey=2ce283498f0b4af689d563fa3d901230`,
-        )
-        .then(res => {
-          setNewsList(res);
-          setLoading(false);
-        });
+      api.then(res => {
+        setNewsList(res);
+        setLoading(false);
+      });
   }, [loading]);
   return (
     <View style={newsPage}>

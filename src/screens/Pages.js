@@ -7,7 +7,7 @@ import NewsList from './NewsList/NewsList';
 import Single from './Single/Single';
 const Page = ({children}) => children;
 
-Page.NewsList = e => {
+Page.NewsList = () => {
   const [loading, setLoading] = useRedux('loading', false);
   const [theme] = useRedux('theme');
   return (
@@ -18,9 +18,7 @@ Page.NewsList = e => {
           <RefreshControl
             style={{backgroundColor: themes[theme]?.secondaryColor}}
             refreshing={loading}
-            onRefresh={() => {
-              setLoading(true);
-            }}
+            onRefresh={() => setLoading(true)}
           />
         }
         style={{flex: 1}}>

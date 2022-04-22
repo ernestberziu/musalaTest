@@ -1,6 +1,5 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
-import NewsList from './NewsList/NewsList';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Page from './Pages';
 import Settings from './Settings/Settings';
@@ -16,11 +15,13 @@ const NavigationStack = () => (
     ))}
   </Stack.Navigator>
 );
+
 Tab.Home = () => (
   <Tab>
     <NavigationStack />
   </Tab>
 );
+
 Tab.Settings = () => (
   <Tab>
     <ScrollView style={{flex: 1}}>

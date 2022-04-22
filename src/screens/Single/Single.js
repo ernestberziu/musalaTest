@@ -9,6 +9,8 @@ import moment from 'moment';
 import {labels} from '../../labels';
 const Single = () => {
   const navigate = useNavigation();
+  const [theme] = useRedux('theme');
+  const [language] = useRedux('language');
   const {
     urlToImage: uri,
     title,
@@ -16,8 +18,6 @@ const Single = () => {
     content,
     publishedAt,
   } = useRoute().params.single;
-  const [theme] = useRedux('theme');
-  const [language] = useRedux('language');
   const {
     singlePage,
     headerContainer,

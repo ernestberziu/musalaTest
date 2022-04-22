@@ -6,8 +6,8 @@ import {themes} from '../../themes';
 import {styles} from './styles';
 import {labels} from '../../labels';
 const Header = () => {
-  const [, setSearchedValue] = useRedux('searchedValue');
-  const [search, setSearch] = useSearch(3000);
+  const [, setSearchedValue] = useRedux('searchedValue', '');
+  const [search, setSearch] = useSearch(2000);
   const [theme] = useRedux('theme');
   const [language] = useRedux('language', 'en');
   const {header, search: searchContainer, searchInput} = styles(theme);

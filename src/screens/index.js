@@ -2,8 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Tabs from './Tabs';
 import {useRedux} from '../../hooks';
-import {themes} from '../themes';
-
+import {styles} from './style';
 const tabs = [
   {en: 'Home', it: 'Casa'},
   {en: 'Settings', it: 'Impostazioni'},
@@ -13,28 +12,16 @@ const Tab = createBottomTabNavigator();
 export const NavigationStack = () => {
   const [theme] = useRedux('theme');
   const [language] = useRedux('language', 'en');
+  const {tabBarStyle, tabBarItemStyle, tabBarLabelStyle, tabBarIconStyle} =
+    styles(theme);
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: {
-          height: 60,
-          marginBottom: -35,
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          backgroundColor: themes[theme]?.primaryColor,
-        },
-        tabBarItemStyle: {
-          color: 'white',
-          margin: 5,
-          borderRadius: 10,
-        },
-        tabBarLabelStyle: {
-          fontWeight: '700',
-          fontSize: 16,
-        },
-        tabBarIconStyle: {display: 'none'},
+        tabBarStyle,
+        tabBarItemStyle,
+        tabBarLabelStyle,
+        tabBarIconStyle,
       }}>
       {tabs.map((name, key) => (
         <Tab.Screen
