@@ -7,8 +7,8 @@ export const styles = theme =>
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      flex: 1,
       paddingVertical: 20,
       backgroundColor: themes[theme]?.secondaryColor,
-      height: windowHeight,
     },
   });

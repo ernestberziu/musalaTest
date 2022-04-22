@@ -1,9 +1,10 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import {themes} from '../../themes';
-export const styles = theme =>
-  StyleSheet.create({
+const width = Dimensions.get('window').width;
+export const styles = theme => {
+  return StyleSheet.create({
     cardContainer: {
-      width: '100%',
+      width: width,
       position: 'relative',
       paddingHorizontal: 0,
     },
@@ -12,11 +13,15 @@ export const styles = theme =>
       bottom: 20,
       textAlign: 'center',
       color: themes[theme]?.textColor,
+      display: 'flex',
+      flexWrap: 'wrap',
+      width: width,
       alignSelf: 'center',
       fontSize: 20,
       fontWeight: '600',
 
       backgroundColor: themes[theme]?.primaryColor,
     },
-    mainImage: {width: '100%', height: 300},
+    mainImage: {width: width, height: 300},
   });
+};

@@ -17,7 +17,7 @@ const App = () => {
   const [theme] = useRedux('theme', 'light');
   return (
     <SafeAreaView
-      style={{height: '100%', backgroundColor: themes[theme]?.secondaryColor}}>
+      style={{flex: 1, backgroundColor: themes[theme]?.secondaryColor}}>
       <NavigationContainer>
         <NavigationStack />
       </NavigationContainer>

@@ -4,17 +4,25 @@ import Tabs from './Tabs';
 import {useRedux} from '../../hooks';
 import {themes} from '../themes';
 
-const tabs = ['Home', 'Settings'];
+const tabs = [
+  {en: 'Home', it: 'Casa'},
+  {en: 'Settings', it: 'Impostazioni'},
+];
+const Tab = createBottomTabNavigator();
 
 export const NavigationStack = () => {
-  const Tab = createBottomTabNavigator();
   const [theme] = useRedux('theme');
+  const [language] = useRedux('language', 'en');
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          height: 40,
+          height: 60,
+          marginBottom: -35,
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
           backgroundColor: themes[theme]?.primaryColor,
         },
         tabBarItemStyle: {
@@ -29,7 +37,14 @@ export const NavigationStack = () => {
         tabBarIconStyle: {display: 'none'},
       }}>
       {tabs.map((name, key) => (
-        <Tab.Screen {...{name, iconName: 'home', key, component: Tabs[name]}} />
+        <Tab.Screen
+          {...{
+            name: name[language],
+            iconName: 'home',
+            key,
+            component: Tabs[name.en],
+          }}
+        />
       ))}
     </Tab.Navigator>
   );
