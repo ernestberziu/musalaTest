@@ -7,14 +7,17 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
 import {SafeAreaView} from 'react-native';
 import {NavigationStack} from './src/screens';
 import {NavigationContainer} from '@react-navigation/native';
+import {themes} from './src/themes';
+import {useRedux} from './hooks';
 
-const App: () => Node = () => {
+const App = () => {
+  const [theme] = useRedux('theme', 'light');
   return (
-    <SafeAreaView style={{height: '100%'}}>
+    <SafeAreaView
+      style={{height: '100%', backgroundColor: themes[theme]?.secondaryColor}}>
       <NavigationContainer>
         <NavigationStack />
       </NavigationContainer>

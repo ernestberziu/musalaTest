@@ -3,10 +3,12 @@ import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {useRedux} from '../../../hooks';
 import {ArticleCard} from '../../components';
+import {styles} from './styles';
 const NewsList = () => {
   const [newsList, setNewsList] = useState({});
+  const [theme] = useRedux('theme');
   const [searchedValue] = useRedux('searchedValue', 'latest');
-
+  const {newsPage} = styles(theme);
   useEffect(() => {
     axios
       .get(
@@ -15,9 +17,7 @@ const NewsList = () => {
       .then(setNewsList);
   }, [searchedValue]);
   return (
-    <View style={{display: 'flex'}}>
-      {newsList?.data?.articles?.map(ArticleCard)}
-    </View>
+    <View style={newsPage}>{newsList?.data?.articles?.map(ArticleCard)}</View>
   );
 };
 export default NewsList;
