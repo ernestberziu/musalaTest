@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 /**
  *
- * @param {String} variable varible name to create the redux state
+ * @param {String} variable variable name to create the redux state
  * @param {Object} initial  initial value of state
  * @param {Boolean} reInitialize  if you want to reinitialize when component reinitialized
  * @returns
