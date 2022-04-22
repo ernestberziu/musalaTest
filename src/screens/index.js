@@ -1,22 +1,14 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
-import {Header} from '../components';
-import NewsList from './NewsList/NewsList';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Tabs from './Tabs';
 
-const Page = ({children}) => children;
-Page.NewsList = () => (
-  <Page>
-    <Header />
-    <ScrollView style={{flex: 1}}>
-      <NewsList />
-    </ScrollView>
-  </Page>
+const Tab = createBottomTabNavigator();
+const tabs = ['Home', 'Settings'];
+
+export const NavigationStack = () => (
+  <Tab.Navigator screenOptions={{headerShown: false}}>
+    {tabs.map((name, key) => (
+      <Tab.Screen {...{name, key, component: Tabs[name]}} />
+    ))}
+  </Tab.Navigator>
 );
-Page.Settings = () => (
-  <Page>
-    <ScrollView style={{flex: 1}}>
-      <NewsList />
-    </ScrollView>
-  </Page>
-);
-export default Page;
